@@ -1,25 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
+// import Sidebar from './component/Sidebar';
+import Dashboard from './component/admin/Dashboard';
+import Books from './component/admin/Books'
+import Members from './component/admin/Members';
+import Borrow from './component/admin/Borrows';
+import Setting from './component/admin/Setting';
+import Landing from './component/admin/Landing';
+import BorrowerDashboard from './component/borrower/Dashboard';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/books" element={<Books />} />
+          <Route path="/members" element={<Members />} />
+          <Route path="/borrow" element={<Borrow />} />
+          <Route path="/settings" element={<Setting />} />
+          <Route path="/borrower/dashboard" element={<BorrowerDashboard />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
 export default App;
+
