@@ -5,7 +5,6 @@ import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import api from "../config/config.js";
 import DarkVeil from "../component/animations/Darkveil.jsx";
-// import axios from 'axios';
 
 function Login() {
   const navigate = useNavigate();
@@ -17,33 +16,34 @@ function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
-    console.log("Email:", email);
-    console.log("Password:", password);
     try {
-      // const response = await axios.post('http://localhost:4000/api/login', {
-      const response = await api.post("/login", {
-        email,
-        password,
-      });
+      const response = await api.post("/login", { email, password });
 
-      toast.success("Login successful", {
-        position: "top-center",
-      });
+      toast.success("Login successful", { position: "top-center" });
 
       const token = response.data.token;
       const user = response.data.user;
+
       if (token) {
         localStorage.setItem("token", token);
+        localStorage.setItem("name", user.name);
       }
 
-      console.log("Token: ", response.data.token);
-      console.log("User: ", response.data.user);
       if (token && user) {
         Login({ user, token });
-        setTimeout(() => navigate("/dashboard"), 1000);
+
+        if (user.role === "Librarian") {
+          setTimeout(() => navigate("/dashboard"), 1000);
+        } else if (user.role === "Borrower") {
+          setTimeout(() => navigate("/borrower/dashboard"), 1000);
+        } else {
+          setTimeout(() => navigate("/dashboard"), 1000);
+        }
       }
     } catch (error) {
-      toast.error("Please enter a valid email or password");
+      toast.error("Please enter a valid email or password", {
+        position: "top-center",
+      });
     } finally {
       setLoading(false);
     }
@@ -52,10 +52,10 @@ function Login() {
   return (
     <>
       <div
-        className="main flex justify-center items-center h-screen bg-slate-200"
+        className="main flex justify-center items-center min-h-screen bg-slate-200 px-4"
         style={{ position: "relative", overflow: "hidden" }}
       >
-        {/* DarkVeil as background */}
+        {/* Background Animation */}
         <div
           style={{
             position: "absolute",
@@ -66,51 +66,72 @@ function Login() {
             zIndex: 0,
           }}
         >
-          <DarkVeil speed={0.5} squareSize={48}  borderColor='#fff' hoverFillColor='rgb(37 99 235)'  />
+          <DarkVeil
+            speed={0.5}
+            squareSize={48}
+            borderColor="#fff"
+            hoverFillColor="rgb(37 99 235)"
+          />
         </div>
+
         <ToastContainer />
+
+        {/* Login Card */}
         <div
-          className="head w-[450px] h-[450px] flex flex-col justify-center content-center border-2 border-gray-300 bg-white rounded-xl shadow-xl"
+          className="head w-full max-w-md sm:max-w-lg md:max-w-md lg:max-w-lg flex flex-col justify-center border border-gray-300 bg-white rounded-xl shadow-xl p-6 sm:p-8"
           style={{ position: "relative", zIndex: 1 }}
         >
-          <div className="top header flex justify-center items-center flex-col">
-            <MdLocalLibrary className="text-6xl mb-2 text-blue-600 hover:text-black cursor-pointer animate-colorCycle" />
-            <h1 className="text-2xl font-bold">Library Management</h1>
-            <p>Please Sign In to get access</p>
+          {/* Header */}
+          <div className="top header flex justify-center items-center flex-col mb-6 text-center">
+            <MdLocalLibrary className="text-5xl sm:text-6xl mb-3 text-blue-600 hover:text-black cursor-pointer animate-colorCycle" />
+            <h1 className="text-xl sm:text-2xl font-bold">Library Management</h1>
+            <p className="text-sm sm:text-base text-gray-600">
+              Please Sign In to get access
+            </p>
           </div>
-          <form className="ml-5 mr-5 mt-5" onSubmit={handleSubmit}>
-            <h1 className="text-lg font-medium">Email</h1>
-            <input
-              className="border-2 border-gray-200 p-1 mb-2 rounded-lg w-full shadow-sm"
-              type="text"
-              placeholder=" admin@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <h1 className="text-lg font-medium">Password</h1>
-            <input
-              className="border-2 border-gray-200 p-1 mb-2 rounded-lg w-full shadow-sm"
-              type="password"
-              placeholder=" ********"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <p className="text-sm text-gray-500 text-center">
+
+          {/* Form */}
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <div>
+              <label className="text-sm sm:text-base font-medium">Email</label>
+              <input
+                className="border border-gray-300 p-2 rounded-lg w-full shadow-sm text-sm sm:text-base focus:ring-2 focus:ring-blue-500 outline-none"
+                type="email"
+                placeholder="admin@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label className="text-sm sm:text-base font-medium">Password</label>
+              <input
+                className="border border-gray-300 p-2 rounded-lg w-full shadow-sm text-sm sm:text-base focus:ring-2 focus:ring-blue-500 outline-none"
+                type="password"
+                placeholder="********"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <p className="text-xs sm:text-sm text-gray-500 text-center">
               Forgot Password?{" "}
               <span className="text-red-700 cursor-pointer hover:underline">
                 Click Here
               </span>
             </p>
-            <div className="button flex justify-center items-center mt-4 ">
+
+            <div className="button flex justify-center items-center">
               <button
-                className="px-4 py-2 bg-black text-white rounded-lg w-full hover:bg-blue-600"
+                className="px-4 py-2 sm:px-5 sm:py-2.5 bg-black text-white rounded-lg w-full hover:bg-blue-600 transition-colors text-sm sm:text-base"
                 type="submit"
               >
                 {loading ? "Loading..." : "Login"}
               </button>
             </div>
-            <p className="text-sm text-gray-500 text-center mt-2">
-              Don't have an account?{" "}
+
+            <p className="text-xs sm:text-sm text-gray-500 text-center">
+              Don&apos;t have an account?{" "}
               <span className="text-red-700 cursor-pointer hover:underline">
                 Sign Up
               </span>

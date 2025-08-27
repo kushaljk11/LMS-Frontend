@@ -1,156 +1,146 @@
-import Sidebar from "../Sidebar";
-import Topbar from "../Topbar";
-import { useState } from "react";
+import Sidebar from "./Sidebar";
+import Topbar from "./Topbar";
+import { useState, useEffect } from "react";
 
-const initialBorrows = [
-  {
-    id: 1,
-    bookTitle: "The Great Gatsby",
-    memberName: "John Doe",
-    borrowDate: "2024-07-01",
-    dueDate: "2024-07-15",
-    status: "Returned",
-  },
-  {
-    id: 2,
-    bookTitle: "Clean Code",
-    memberName: "Jane Smith",
-    borrowDate: "2024-07-05",
-    dueDate: "2024-07-19",
-    status: "Borrowed",
-  },
-];
-
-const filters = ["All", "Borrowed", "Returned", "Overdue"];
-
-function Borrow() {
-  const [borrows] = useState(initialBorrows);
+export default function BorrowAdmin() {
+  const [borrows, setBorrows] = useState([]);
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("All");
+  const [loading, setLoading] = useState(true);
 
-  const filteredBorrows = borrows.filter((b) => {
-    const matchesFilter = filter === "All" || b.status === filter;
-    const matchesSearch =
-      b.bookTitle.toLowerCase().includes(search.toLowerCase()) ||
-      b.memberName.toLowerCase().includes(search.toLowerCase());
-    return matchesFilter && matchesSearch;
-  });
+  // Fetch all borrow records for admin
+  useEffect(() => {
+    const fetchBorrows = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch("http://localhost:4000/api/borrow/all-records", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await res.json();
+        const validBorrows = (data.borrows || []).filter(b => b.bookId && b.userId);
+        setBorrows(validBorrows);
+        setLoading(false);
+        
+        
+      } catch (error) {
+        console.error("Error fetching borrower records:", error);
+        setLoading(false);
+      }
+    };
+    fetchBorrows();
+    
+  }, []);
+
+  if (loading) return <div className="p-6 text-center">Loading borrower records...</div>;
+
+  // Separate borrowed and returned
+  const borrowedList = borrows.filter(b => !b.returnDate);
+  const returnedList = borrows.filter(b => b.returnDate);
 
   return (
-    <>
-      <div className="main min-h-screen bg-white flex flex-col">
-        <Topbar />
-        <div className="flex flex-1">
-          <Sidebar />
-          <div className="content flex-1 p-8">
-            <div className="mb-8">
-              <h1 className="text-4xl font-bold text-black mb-1">Borrow Records</h1>
-              <p className="text-lg text-gray-500">
-                Manage book borrow and return transactions
-              </p>
-            </div>
-            <div className="flex flex-col md:flex-row md:items-center gap-4 mb-8">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <Topbar />
+      <div className="flex flex-1">
+        <Sidebar />
+        <main className="flex-1 md:ml-64 p-4 sm:p-6 lg:p-8">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-4xl font-bold text-blue-600 mb-4">Borrow Records</h1>
+
+            {/* Search input */}
+            <div className="mb-6">
               <input
                 type="text"
                 placeholder="Search by book or member..."
-                className="border border-gray-300 rounded-lg p-3 flex-1 text-base"
+                className="border border-gray-300 rounded-lg p-3 w-full text-base"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={e => setSearch(e.target.value)}
               />
-              <select
-                className="border border-gray-300 rounded-lg p-3 w-full md:w-56 text-base"
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-              >
-                {filters.map((f) => (
-                  <option key={f} value={f}>
-                    {f}
-                  </option>
-                ))}
-              </select>
-              <button className="bg-black text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-gray-800 transition">
-                <span className="text-xl">+</span> New Borrow
-              </button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredBorrows.map((b) => (
-                <div
-                  key={b.id}
-                  className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm flex flex-col"
-                >
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <h2 className="text-lg font-bold text-black">{b.bookTitle}</h2>
-                      <p className="text-gray-500 text-base mb-2">
-                        Borrowed by {b.memberName}
-                      </p>
-                    </div>
-                    <span
-                      className={`text-xs font-semibold px-3 py-1 rounded-lg h-fit capitalize ${
-                        b.status === "Borrowed"
-                          ? "bg-yellow-500 text-white"
-                          : b.status === "Returned"
-                          ? "bg-green-500 text-white"
-                          : "bg-red-500 text-white"
-                      }`}
-                    >
-                      {b.status}
-                    </span>
-                  </div>
-                  <div className="text-sm text-gray-700 space-y-1 mb-4">
-                    <div>
-                      <span className="font-medium text-gray-500">Borrowed:</span>{" "}
-                      {b.borrowDate}
-                    </div>
-                    <div>
-                      <span className="font-medium text-gray-500">Due:</span>{" "}
-                      {b.dueDate}
-                    </div>
-                  </div>
-                  <div className="flex gap-3 mt-auto">
-                    <button className="flex items-center gap-1 border border-gray-300 rounded-lg px-4 py-2 text-gray-800 hover:bg-gray-100 transition">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a4 4 0 01-1.414.94l-4.243 1.415 1.415-4.243a4 4 0 01.94-1.414z"
-                        />
-                      </svg>
-                      Edit
-                    </button>
-                    <button className="flex items-center gap-1 border border-gray-300 rounded-lg px-4 py-2 text-gray-800 hover:bg-gray-100 transition">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              ))}
+
+            {/* Currently Borrowed */}
+            <div className="mb-12">
+              <h2 className="text-2xl text-red-600 font-semibold mb-4">
+                Currently Borrowed ({borrowedList.length})
+              </h2>
+              {borrowedList.length === 0 && <p className="text-gray-500">No books currently borrowed.</p>}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {borrowedList
+                  .filter(b =>
+                    b.bookId.title.toLowerCase().includes(search.toLowerCase()) ||
+                    b.userId.name.toLowerCase().includes(search.toLowerCase())
+                  )
+                  .map(b => {
+                    const borrowDate = b.borrowDate ? new Date(b.borrowDate).toLocaleDateString() : "N/A";
+                    const dueDate = b.dueDate ? new Date(b.dueDate).toLocaleDateString() : "N/A";
+                    const bookTitle = b.bookId?.title || "Untitled Book";
+                    const memberName = b.userId?.name || "Unknown Member";
+                    const isOverdue = b.dueDate && new Date(b.dueDate) < new Date();
+
+                    return (
+                      <div key={b._id} className={`bg-white border ${isOverdue ? "border-red-500" : "border-gray-200"} rounded-2xl p-6 shadow-sm flex flex-col`}>
+                        <div className="flex items-start justify-between mb-2">
+                          <div>
+                            <h3 className="text-lg font-bold text-black">{bookTitle}</h3>
+                            <p className="text-gray-500 text-base mb-2">Borrowed by {memberName}</p>
+                          </div>
+                          <span className="text-xs font-semibold px-3 py-1 rounded-lg h-fit capitalize bg-yellow-500 text-white">
+                            Borrowed
+                          </span>
+                        </div>
+                        <div className="text-sm text-gray-700 space-y-1">
+                          <div><span className="font-medium text-gray-500">Borrowed:</span> {borrowDate}</div>
+                          <div><span className="font-medium text-gray-500">Due:</span> {dueDate}</div>
+                          {isOverdue && <div className="text-red-500 font-medium">Overdue</div>}
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
+
+            {/* Returned */}
+            <div>
+              <h2 className="text-2xl text-green-600 font-semibold mb-4">
+                Returned ({returnedList.length})
+              </h2>
+              {returnedList.length === 0 && <p className="text-gray-500">No books have been returned yet.</p>}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {returnedList
+                  .filter(b =>
+                    b.bookId.title.toLowerCase().includes(search.toLowerCase()) ||
+                    b.userId.name.toLowerCase().includes(search.toLowerCase())
+                  )
+                  .map(b => {
+                    const borrowDate = b.borrowDate ? new Date(b.borrowDate).toLocaleDateString() : "N/A";
+                    const dueDate = b.dueDate ? new Date(b.dueDate).toLocaleDateString() : "N/A";
+                    const returnDate = b.returnDate ? new Date(b.returnDate).toLocaleDateString() : "N/A";
+                    const bookTitle = b.bookId?.title || "Untitled Book";
+                    const memberName = b.userId?.name || "Unknown Member";
+
+                    return (
+                      <div key={b._id} className="bg-white border border-green-300 rounded-2xl p-6 shadow-sm flex flex-col">
+                        <div className="flex items-start justify-between mb-2">
+                          <div>
+                            <h3 className="text-lg font-bold text-black">{bookTitle}</h3>
+                            <p className="text-gray-500 text-base mb-2">Borrowed by {memberName}</p>
+                          </div>
+                          <span className="text-xs font-semibold px-3 py-1 rounded-lg h-fit capitalize bg-green-500 text-white">
+                            Returned
+                          </span>
+                        </div>
+                        <div className="text-sm text-gray-700 space-y-1">
+                          <div><span className="font-medium text-gray-500">Borrowed:</span> {borrowDate}</div>
+                          <div><span className="font-medium text-gray-500">Due:</span> {dueDate}</div>
+                          <div><span className="font-medium text-gray-500">Returned:</span> {returnDate}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+
           </div>
-        </div>
+        </main>
       </div>
-    </>
+    </div>
   );
 }
-
-export default Borrow;

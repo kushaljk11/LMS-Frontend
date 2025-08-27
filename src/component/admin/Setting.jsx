@@ -1,5 +1,5 @@
-import Sidebar from "../Sidebar";
-import Topbar from "../Topbar";
+import Sidebar from "./Sidebar.jsx";
+import Topbar from "./Topbar.jsx";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext.js"; // adjust path if needed
 
@@ -30,20 +30,21 @@ function Setting() {
   };
 
   return (
-    <>
-      <div className="main min-h-screen bg-white flex flex-col">
-        <Topbar />
-        <div className="flex flex-1">
-          <Sidebar />
-          <div className="content flex-1 p-8">
+    <div className="min-h-screen bg-white flex flex-col">
+      <Topbar />
+      <div className="flex flex-1">
+        <Sidebar />
+        <main className="flex-1 ml-64 p-8">
+          <div className="max-w-xl mx-auto">
             <div className="mb-8">
-              <h1 className="text-4xl font-bold text-black mb-1">Settings</h1>
+              <h1 className="text-4xl font-bold text-blue-600 mb-1">Settings</h1>
               <p className="text-lg text-gray-500">
                 Manage your library information and preferences
               </p>
             </div>
+
             <form
-              className="max-w-xl bg-white border border-gray-200 rounded-2xl p-8 shadow-sm space-y-6"
+              className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm space-y-6"
               onSubmit={handleSubmit}
             >
               <div>
@@ -58,6 +59,7 @@ function Setting() {
                   required
                 />
               </div>
+
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">
                   Email
@@ -70,6 +72,7 @@ function Setting() {
                   required
                 />
               </div>
+
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">
                   Phone
@@ -82,6 +85,7 @@ function Setting() {
                   required
                 />
               </div>
+
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">
                   Address
@@ -94,12 +98,14 @@ function Setting() {
                   required
                 />
               </div>
+
               <button
                 type="submit"
-                className="bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
               >
                 Save Changes
               </button>
+
               {success && (
                 <div className="text-green-600 font-semibold mt-2">
                   Settings updated!
@@ -107,9 +113,9 @@ function Setting() {
               )}
             </form>
           </div>
-        </div>
+        </main>
       </div>
-    </>
+    </div>
   );
 }
 
