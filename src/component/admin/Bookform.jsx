@@ -19,10 +19,9 @@ export default function Bookform({ modelForm, fetchBooks }) {
   });
   const [loading, setLoading] = useState(false);
 
-  // Close modal
   const closeModal = () => modelForm(false);
 
-  // Handle input changes
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -35,7 +34,6 @@ export default function Bookform({ modelForm, fetchBooks }) {
     }));
   };
 
-  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -63,10 +61,8 @@ export default function Bookform({ modelForm, fetchBooks }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Background */}
       <div className="absolute inset-0 bg-black/40" onClick={closeModal} />
 
-      {/* Modal box */}
   <div className="bg-white rounded-lg shadow-lg w-full max-w-xl mx-4 z-10 p-4 sm:p-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Add New Book</h2>

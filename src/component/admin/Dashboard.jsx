@@ -56,7 +56,6 @@ export default function Dashboard() {
               <div className="text-center text-red-500">{error}</div>
             ) : stats ? (
               <>
-                {/* Stats Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                   <Card
                     title="Total Books"
@@ -84,7 +83,6 @@ export default function Dashboard() {
                   />
                 </div>
 
-                {/* Recent Issues & Quick Actions */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">Recent Book Issues</h3>

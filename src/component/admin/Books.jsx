@@ -19,7 +19,7 @@ export default function Books() {
     setError("");
 
     try {
-      const response = await axios.get("http://localhost:4000/api/books", {
+      const response = await axios.get("https://lms-ozcq.onrender.com/api/books", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       if (response.status === 200) {

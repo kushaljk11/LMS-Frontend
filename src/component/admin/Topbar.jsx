@@ -17,7 +17,6 @@ export default function Topbar() {
     <>
       <div className="w-full shadow-md border-b bg-gray-100 flex justify-between items-center px-4 sm:px-6 py-3">
         <div className="flex items-center space-x-3">
-          {/* Mobile menu button - toggles the mobile slide-over */}
           <button
             className="md:hidden p-2 rounded hover:bg-gray-200"
             aria-label="Open menu"
@@ -39,17 +38,14 @@ export default function Topbar() {
         </div>
       </div>
 
-      {/* Mobile slide-over menu (visible when open) */}
       {open && (
         <div className="fixed inset-0 z-50">
-          {/* Backdrop */}
           <div
             className="absolute inset-0 bg-black/40"
             onClick={() => setOpen(false)}
             aria-hidden
           />
 
-          {/* Panel */}
           <div className="absolute left-0 top-0 bottom-0 w-72 bg-white shadow-lg p-4 overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">

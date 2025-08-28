@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const baseURL = "http://localhost:4000/api";
+export const baseURL = "https://lms-ozcq.onrender.com/api";
 
 //create axios instance
 const api = axios.create({

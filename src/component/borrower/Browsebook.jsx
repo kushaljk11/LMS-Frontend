@@ -16,7 +16,7 @@ export default function BrowseBooks({ onBorrow, refreshBooks }) {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get("http://localhost:4000/api/books", {
+      const response = await axios.get("https://lms-ozcq.onrender.com/api/books", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setBooksData(response.data.books || response.data);
@@ -95,7 +95,7 @@ export default function BrowseBooks({ onBorrow, refreshBooks }) {
           </h1>
           <p className="text-gray-600 mb-4">Discover and borrow books</p>
 
-          {/* Search + Category Filter */}
+          {/* Search ra Category Filter */}
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
             <input
               type="text"
@@ -155,18 +155,15 @@ export default function BrowseBooks({ onBorrow, refreshBooks }) {
                     )}
                   </div>
 
-                  {/* Book Details */}
                   <h2 className="font-semibold">{book.title}</h2>
                   <p className="text-gray-600">{book.author}</p>
 
-                  {/* Total & Available */}
                   <p className="text-sm text-gray-500 mt-2">
                     Total: <strong>{book.total ?? book.quantity ?? 0}</strong>{" "}
                     | Available:{" "}
                     <strong>{book.availableBooks ?? book.quantity ?? 0}</strong>
                   </p>
 
-                  {/* Borrow Button */}
                   <button
                     className={`mt-4 w-full py-2 rounded ${
                       isAvailable
@@ -183,7 +180,6 @@ export default function BrowseBooks({ onBorrow, refreshBooks }) {
             })}
           </div>
 
-          {/* Pagination */}
           <div className="flex justify-center mt-6 gap-2">
             <button
               className="px-3 py-1 border rounded disabled:opacity-50"

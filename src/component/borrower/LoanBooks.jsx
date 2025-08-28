@@ -14,7 +14,7 @@ export default function LoanedBooks() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/borrow/history", {
+        const res = await fetch("https://lms-ozcq.onrender.com/api/borrow/history", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -54,7 +54,7 @@ export default function LoanedBooks() {
   const handleReturn = async (borrowId) => {
     try {
       const res = await fetch(
-        `http://localhost:4000/api/borrow/return/${borrowId}`,
+        `https://lms-ozcq.onrender.com/api/borrow/return/${borrowId}`,
         {
           method: "POST",
           headers: {
@@ -122,7 +122,6 @@ export default function LoanedBooks() {
             Track your borrowed books and their status
           </p>
 
-          {/* Search + Filter */}
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
             <input
               type="text"
@@ -241,7 +240,6 @@ function LoanBookCard({ book, onReturn }) {
           </div>
         </div>
 
-        {/* Buttons (show only if not returned) */}
         {!book.returned && (
           <div className="flex gap-2 mt-4">
             <button className="flex-1 flex items-center justify-center gap-2 text-green-600 border border-green-600 rounded-lg py-2 hover:bg-green-50 transition font-medium">

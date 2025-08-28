@@ -11,7 +11,7 @@ export default function BorrowingHistory() {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/borrow/history", {
+        const res = await fetch("https://lms-ozcq.onrender.com/api/borrow/history", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -39,7 +39,6 @@ export default function BorrowingHistory() {
     fetchHistory();
   }, []);
 
-  // Filtered history for search & status
   const filteredHistory = historyData.filter((book) => {
     const matchesSearch =
       book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

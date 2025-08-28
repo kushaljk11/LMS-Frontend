@@ -76,12 +76,10 @@ function Login() {
 
         <ToastContainer />
 
-        {/* Login Card */}
         <div
           className="head w-full max-w-md sm:max-w-lg md:max-w-md lg:max-w-lg flex flex-col justify-center border border-gray-300 bg-white rounded-xl shadow-xl p-6 sm:p-8"
           style={{ position: "relative", zIndex: 1 }}
         >
-          {/* Header */}
           <div className="top header flex justify-center items-center flex-col mb-6 text-center">
             <MdLocalLibrary className="text-5xl sm:text-6xl mb-3 text-blue-600 hover:text-black cursor-pointer animate-colorCycle" />
             <h1 className="text-xl sm:text-2xl font-bold">Library Management</h1>
@@ -90,7 +88,6 @@ function Login() {
             </p>
           </div>
 
-          {/* Form */}
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label className="text-sm sm:text-base font-medium">Email</label>

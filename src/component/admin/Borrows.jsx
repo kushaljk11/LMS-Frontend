@@ -12,7 +12,7 @@ export default function BorrowAdmin() {
     const fetchBorrows = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:4000/api/borrow/all-records", {
+        const res = await fetch("https://lms-ozcq.onrender.com/api/borrow/all-records", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -45,7 +45,6 @@ export default function BorrowAdmin() {
           <div className="max-w-7xl mx-auto">
             <h1 className="text-4xl font-bold text-blue-600 mb-4">Borrow Records</h1>
 
-            {/* Search input */}
             <div className="mb-6">
               <input
                 type="text"
@@ -56,7 +55,6 @@ export default function BorrowAdmin() {
               />
             </div>
 
-            {/* Currently Borrowed */}
             <div className="mb-12">
               <h2 className="text-2xl text-red-600 font-semibold mb-4">
                 Currently Borrowed ({borrowedList.length})
@@ -97,7 +95,6 @@ export default function BorrowAdmin() {
               </div>
             </div>
 
-            {/* Returned */}
             <div>
               <h2 className="text-2xl text-green-600 font-semibold mb-4">
                 Returned ({returnedList.length})

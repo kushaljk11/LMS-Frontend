@@ -4,7 +4,6 @@ import TextType from "../animations/TextType";
 function Landing() {
   return (
     <>
-      {/* Navbar */}
       <div className="w-full shadow-md border-b px-6 py-4 bg-white flex justify-between items-center sticky top-0 z-50 font-sans">
         <div className="flex items-center space-x-3">
           <MdLocalLibrary className="text-5xl text-blue-600" />
@@ -21,7 +20,6 @@ function Landing() {
         </button>
       </div>
 
-      {/* Hero / JK Library Fullscreen */}
       <div className="h-screen flex flex-col justify-center items-center text-center font-sans bg-gray-50">
         <TextType
           text="JK Library"
@@ -49,14 +47,12 @@ function Landing() {
         </div>
       </div>
 
-      {/* Banner Fullscreen Section with Overlay Text */}
       <div className="relative h-screen w-full">
         <img
-          src="/banner.jpg" // from public folder
+          src="/banner.jpg" 
           alt="Library Banner"
           className="w-full h-full object-cover"
         />
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center px-6">
           <h2 className="text-4xl md:text-5xl font-bold text-white">
             Welcome to JK Library
@@ -74,7 +70,6 @@ function Landing() {
         </div>
       </div>
 
-      {/* Feature Cards */}
       <div className="flex flex-col text-center justify-center items-center py-20 bg-white font-sans">
         <h1 className="text-4xl font-bold text-green-600">
           Everything You Need for Your Library
@@ -102,7 +97,6 @@ function Landing() {
         </div>
       </div>
 
-      {/* Why Choose Us */}
       <div className="flex flex-col lg:flex-row justify-center gap-12 bg-gray-50 px-6 lg:px-16 py-20 font-sans">
         <div className="w-full lg:w-2/3">
           <h1 className="text-3xl lg:text-4xl font-bold text-blue-600">
@@ -135,7 +129,6 @@ function Landing() {
         </div>
       </div>
 
-      {/* Final CTA */}
       <div className="text-center py-28 bg-gray-100 font-sans">
         <h1 className="text-4xl font-bold text-blue-600">
           Ready To Transform Your Library?
@@ -153,7 +146,6 @@ function Landing() {
         <p className="text-gray-400 font-medium">kushaladmin@library.com</p>
       </div>
 
-      {/* Footer */}
       <footer className="bg-white py-4 mt-4 text-center font-medium text-gray-500 border-t">
         <p>© 2025 JK LMS. All rights reserved.</p>
       </footer>

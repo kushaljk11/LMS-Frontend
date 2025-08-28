@@ -68,7 +68,6 @@
             <Sidebar />
             <main className="flex-1 md:ml-64 p-4 sm:p-6 lg:p-8">
               <div className="max-w-7xl mx-auto">
-              {/* Header */}
               <div className="mb-8">
                 <h1 className="text-4xl font-bold text-blue-600 mb-1">Borrowers</h1>
                 <p className="text-lg text-gray-500">
@@ -76,7 +75,6 @@
                 </p>
               </div>
 
-              {/* Search, Filter, Add Borrower */}
               <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
                 <input
                   type="text"

@@ -22,7 +22,7 @@ function BorrowerDashboard() {
       setLoading(true);
       const token = localStorage.getItem("token");
 
-      const res = await axios.get("http://localhost:4000/api/borrow/history", {
+      const res = await axios.get("https://lms-ozcq.onrender.com/api/borrow/history", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setDashboardData(res.data.borrows || []);
@@ -39,7 +39,7 @@ function BorrowerDashboard() {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        `http://localhost:4000/api/borrow/return/${borrowId}`,
+        `https://lms-ozcq.onrender.com/api/borrow/return/${borrowId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

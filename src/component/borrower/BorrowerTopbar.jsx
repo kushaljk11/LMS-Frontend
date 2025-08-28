@@ -14,7 +14,6 @@ export default function BorrowerTopbar() {
   return (
     <header className="w-full fixed top-0 left-0 bg-gray-100 shadow-md border-b z-30">
       <div className="w-full h-20 flex items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo - Left */}
         <div className="flex items-center space-x-2 pl-5 flex-shrink-0">
           <div className="bg-green-600 p-3 rounded-xl text-white">
             <MdLocalLibrary className="text-xl" />
@@ -25,7 +24,6 @@ export default function BorrowerTopbar() {
           </div>
         </div>
 
-        {/* Navigation - Center */}
         <nav className="hidden md:flex items-center gap-4 flex-1 justify-center">
           <TopbarItem icon={<RxDashboard />} label="Dashboard" to="/borrower/dashboard" />
           <TopbarItem icon={<IoBookOutline />} label="Browse Books" to="/borrower/browse-books" />
@@ -34,13 +32,12 @@ export default function BorrowerTopbar() {
           <TopbarItem icon={<FaUserCircle />} label="Profile" to="/borrower/settings" />
         </nav>
 
-        {/* Logout + Hamburger - Right */}
+        {/* Hamburger  */}
         <div className="flex items-center gap-3 flex-shrink-0">
           <div className="hidden md:block pr-6">
             <LogoutButton className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer inline-flex items-center gap-2" />
           </div>
 
-          {/* Hamburger for mobile */}
           <button
             className="md:hidden text-gray-700 text-2xl focus:outline-none p-2 hover:bg-gray-200 rounded-md transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -51,7 +48,6 @@ export default function BorrowerTopbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden bg-gray-100 border-t border-gray-200">
           <nav className="flex flex-col gap-3 p-3">
