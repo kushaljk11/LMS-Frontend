@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from 'react-toastify';
-// import { useAuth } from '../context/AuthContext.js';
+import { toast, ToastContainer } from "react-toastify";
+import { FaSignOutAlt } from "react-icons/fa";
 
 export default function LogoutButton() {
     const navigate = useNavigate();
@@ -26,9 +26,10 @@ export default function LogoutButton() {
         <>
             <button
                 onClick={handleLogout}
-                className="hover:bg-rose-800 text-white bg-blue-600 px-4 py-2 rounded-md text-sm cursor-pointer"
+                className="hover:bg-red-700 bg-rose-800 p-2 rounded-full text-white text-lg cursor-pointer flex items-center justify-center"
+                title="Logout"
             >
-                Logout
+                <FaSignOutAlt />
             </button>
             <ToastContainer />
         </>

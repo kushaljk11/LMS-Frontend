@@ -43,10 +43,10 @@ export default function Dashboard() {
       <Topbar />
       <div className="flex flex-1">
         <Sidebar />
-        <main className="flex-1 md:ml-64 p-4 sm:p-6 lg:p-8">
+  <main className="flex-1 md:ml-64 pt-2 px-4 sm:px-6 lg:px-8 pb-6">
           <div className="max-w-7xl mx-auto">
             <div className="mb-8">
-              <h1 className="text-3xl font-bold text-blue-600 mb-2">Dashboard</h1>
+              <h1 className="text-3xl font-bold text-[#4AB5BB] mb-4">Dashboard</h1>
               <p className="text-gray-600">Welcome to the Library Management System</p>
             </div>
 
@@ -61,7 +61,7 @@ export default function Dashboard() {
                     title="Total Books"
                     value={stats.books || 0}
                     subtitle={`${stats.availableBooks || 0} available`}
-                    icon={<FaBook className="w-5 h-5 text-blue-500" />}
+                    icon={<FaBook className="w-5 h-5 text-[#4AB5BB]" />}
                   />
                   <Card
                     title="Total Members"

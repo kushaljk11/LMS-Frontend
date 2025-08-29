@@ -7,7 +7,6 @@ export default function BorrowAdmin() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // Fetch all borrow records for admin
   useEffect(() => {
     const fetchBorrows = async () => {
       try {
@@ -32,7 +31,6 @@ export default function BorrowAdmin() {
 
   if (loading) return <div className="p-6 text-center">Loading borrower records...</div>;
 
-  // Separate borrowed and returned
   const borrowedList = borrows.filter(b => !b.returnDate);
   const returnedList = borrows.filter(b => b.returnDate);
 
@@ -41,9 +39,9 @@ export default function BorrowAdmin() {
       <Topbar />
       <div className="flex flex-1">
         <Sidebar />
-        <main className="flex-1 md:ml-64 p-4 sm:p-6 lg:p-8">
+  <main className="flex-1 md:ml-64 pt-2 px-4 sm:px-6 lg:px-8 pb-6">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-4xl font-bold text-blue-600 mb-4">Borrow Records</h1>
+            <h1 className="text-4xl font-bold text-[#4AB5BB] mb-4">Borrow Records</h1>
 
             <div className="mb-6">
               <input

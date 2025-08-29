@@ -1,12 +1,11 @@
 import Sidebar from "./Sidebar.jsx";
 import Topbar from "./Topbar.jsx";
 import { useState, useEffect } from "react";
-import { useAuth } from "../../context/AuthContext.js"; // adjust path if needed
+import { useAuth } from "../../context/AuthContext.js";
 
 function Setting() {
-  const { user } = useAuth(); // get logged-in user from context
+  const { user } = useAuth();
 
-  // Initialize state with user info if available
   const [libraryName, setLibraryName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -26,7 +25,7 @@ function Setting() {
     e.preventDefault();
     setSuccess(true);
     setTimeout(() => setSuccess(false), 2000);
-    // You can add API call here to update user info
+    
   };
 
   return (
@@ -34,10 +33,10 @@ function Setting() {
       <Topbar />
       <div className="flex flex-1">
         <Sidebar />
-        <main className="flex-1 ml-64 p-8">
+        <main className="flex-1 p-8">
           <div className="max-w-xl mx-auto">
             <div className="mb-8">
-              <h1 className="text-4xl font-bold text-blue-600 mb-1">Settings</h1>
+              <h1 className="text-4xl font-bold text-[#4AB5BB] mb-1">Settings</h1>
               <p className="text-lg text-gray-500">
                 Manage your library information and preferences
               </p>
@@ -101,7 +100,7 @@ function Setting() {
 
               <button
                 type="submit"
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
+                className="bg-[#4AB5BB] text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
               >
                 Save Changes
               </button>

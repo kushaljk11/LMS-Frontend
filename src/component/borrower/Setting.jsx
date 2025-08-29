@@ -78,6 +78,9 @@ export default function BorrowerProfileSettings() {
           </div>
         </main>
       </div>
+      <div className="bg-white border-t border-gray-200 p-4 text-center text-sm text-gray-500">
+        &copy; 2024 LibraryMS. All rights reserved.
+      </div>
     </div>
   );
 }

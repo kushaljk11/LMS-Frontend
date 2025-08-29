@@ -18,7 +18,7 @@ function BorrowerForm({ modelBorrowerForm, fetchBorrowers, editBorrower }) {
       setPhone(editBorrower.phone || "");
       setStatus(editBorrower.status || "active");
       setRole(editBorrower.role || "Borrower");
-      setPassword(""); // don't prefill password
+  setPassword("");
     }
   }, [editBorrower]);
 
@@ -29,10 +29,8 @@ function BorrowerForm({ modelBorrowerForm, fetchBorrowers, editBorrower }) {
 
     try {
       if (editBorrower) {
-        // Edit mode: only send fields that exist for update
         await api.put(`/register/${editBorrower._id}`, { name, email, phone, status, role });
       } else {
-        // Add new user
         if (!password) {
           setError("Password is required for new users");
           setLoading(false);

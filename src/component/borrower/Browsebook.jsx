@@ -95,7 +95,7 @@ export default function BrowseBooks({ onBorrow, refreshBooks }) {
           </h1>
           <p className="text-gray-600 mb-4">Discover and borrow books</p>
 
-          {/* Search ra Category Filter */}
+          
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
             <input
               type="text"
@@ -120,7 +120,7 @@ export default function BrowseBooks({ onBorrow, refreshBooks }) {
             Showing {currentBooks.length} of {filteredBooks.length} books
           </p>
 
-          {/* Books Grid */}
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {currentBooks.map((book) => {
               const isAvailable = book.availableBooks > 0;
@@ -131,7 +131,7 @@ export default function BrowseBooks({ onBorrow, refreshBooks }) {
                     !isAvailable ? "opacity-60" : ""
                   }`}
                 >
-                  {/* Availability Badge */}
+                  
                   <div
                     className={`absolute top-2 right-2 px-2 py-1 text-xs rounded ${
                       isAvailable
@@ -142,7 +142,7 @@ export default function BrowseBooks({ onBorrow, refreshBooks }) {
                     {isAvailable ? "Available" : "Unavailable"}
                   </div>
 
-                  {/* Book Image */}
+                  
                   <div className="h-40 sm:h-44 bg-gray-200 flex items-center justify-center mb-4">
                     {book.image ? (
                       <img
@@ -208,6 +208,9 @@ export default function BrowseBooks({ onBorrow, refreshBooks }) {
             </button>
           </div>
         </div>
+      </div>
+      <div className="bg-white border-t border-gray-200 p-4 text-center text-sm text-gray-500">
+        &copy; 2024 LibraryMS. All rights reserved.
       </div>
     </div>
   );

@@ -13,28 +13,65 @@ export default function Topbar() {
   const basecss = "cursor-pointer text-2xl text-blue-500";
   const [open, setOpen] = useState(false);
 
+  let userName = "User";
+  try {
+    const raw = localStorage.getItem("user");
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && (parsed.name || parsed.username || parsed.fullname)) {
+        userName = parsed.name || parsed.fullname || parsed.username;
+      }
+    }
+  } catch (e) {
+  }
+
+  const isDashboard = true;
+
   return (
     <>
-      <div className="w-full shadow-md border-b bg-gray-100 flex justify-between items-center px-4 sm:px-6 py-3">
-        <div className="flex items-center space-x-3">
-          <button
-            className="md:hidden p-2 rounded hover:bg-gray-200"
-            aria-label="Open menu"
-            onClick={() => setOpen(true)}
-          >
-            <FaBars className="text-xl text-gray-700" />
-          </button>
+      
+      <div className="w-full">
+        
+        <div className="w-full flex justify-between items-center px-4 sm:px-6 py-2 bg-transparent">
+          <div className="flex items-center space-x-3">
+            <button
+              className="md:hidden p-2 rounded hover:bg-gray-100"
+              aria-label="Open menu"
+              onClick={() => setOpen(true)}
+            >
+              <FaBars className="text-lg text-gray-700" />
+            </button>
 
-          <div className="bg-blue-600 p-3 rounded-xl text-white">
-            <MdLocalLibrary className="text-2xl" />
+            
+            <div className="flex items-center gap-3 bg-white shadow-lg rounded-lg px-3 py-1">
+              <div className="bg-[#4AB5BB] p-2 rounded text-white">
+                <MdLocalLibrary className="text-lg" />
+              </div>
+              <div className="hidden sm:block">
+                <p className="font-semibold leading-none">Jk Library</p>
+                <p className="text-gray-500 text-sm leading-none">Management System</p>
+              </div>
+            </div>
           </div>
-          <div>
-            <p className="font-semibold leading-none">Library System</p>
-            <p className="text-gray-600 text-sm leading-none">Management Portal</p>
+
+          <div className="flex items-center gap-4">
+            {!isDashboard && <LogoutButton className={basecss} />}
           </div>
         </div>
-        <div className="flex items-center gap-4">
-          <LogoutButton className={basecss} />
+
+        
+        <div className="px-4 sm:px-6 md:ml-64">
+          <div className="bg-[#4AB5BB] text-white rounded-full flex items-center justify-between px-4 py-2 shadow-md md:-translate-y-8">
+              <div className="flex items-center gap-3">
+                <div className="text-3sm font-medium">Welcome {userName},</div>
+              </div>
+
+            <div className="flex items-center gap-3">
+              <div className=" px-3 py-1">
+                <LogoutButton className="text-red-700 font-semibold text-sm" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -49,7 +86,7 @@ export default function Topbar() {
           <div className="absolute left-0 top-0 bottom-0 w-72 bg-white shadow-lg p-4 overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <div className="bg-blue-600 p-3 rounded text-white">
+                <div className="bg-[#4AB5BB] p-3 rounded text-white">
                   <MdLocalLibrary className="text-lg" />
                 </div>
                 <div>

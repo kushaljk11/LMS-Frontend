@@ -62,7 +62,6 @@ export default function Books() {
     return matchesCategory && matchesSearch;
   });
 
-  // Delete book
   const handleDelete = async (book) => {
     if (!window.confirm("Are you sure you want to delete this book?")) return;
 
@@ -79,7 +78,6 @@ export default function Books() {
     }
   };
 
-  // Open edit form
   const handleEdit = (book) => {
     setEditBookData(book);
     setModelForm(true);
@@ -90,11 +88,11 @@ export default function Books() {
       <Topbar />
       <div className="flex flex-1">
         <Sidebar />
-        <main className="flex-1 md:ml-64 p-4 sm:p-6 lg:p-8">
+  <main className="flex-1 md:ml-64 pt-2 px-4 sm:px-6 lg:px-8 pb-6">
           <div className="max-w-7xl mx-auto">
             <div className="mb-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
               <div>
-                <h1 className="text-3xl sm:text-4xl font-bold text-blue-600 mb-1">Books</h1>
+                <h1 className="text-3xl sm:text-4xl font-bold text-[#4AB5BB] mb-1">Books</h1>
                 <p className="text-base sm:text-lg text-gray-500">Manage your library's book collection</p>
               </div>
               <div className="flex-shrink-0">
@@ -103,7 +101,7 @@ export default function Books() {
                     setEditBookData(null);
                     setModelForm(true);
                   }}
-                  className="bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-blue-700 transition w-full sm:w-auto"
+                  className="bg-[#4AB5BB] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-blue-700 transition w-full sm:w-auto"
                 >
                   <FaPlus /> Add Book
                 </button>
@@ -146,7 +144,7 @@ export default function Books() {
                   >
                     <div className="flex items-start justify-between mb-2">
                       <div>
-                        <h2 className="text-xl font-bold text-blue-600">{book.title}</h2>
+                        <h2 className="text-xl font-bold text-[#4AB5BB]">{book.title}</h2>
                         <p className="text-gray-500 text-base mb-2">by {book.author}</p>
                       </div>
                       <span className="bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-lg h-fit capitalize">

@@ -34,8 +34,7 @@
     }, []);
 
     const handleDelete = async (id) => {
-      // eslint-disable-next-line no-restricted-globals
-      if (!confirm("Are you sure you want to delete this borrower?")) return;
+  if (!window.confirm("Are you sure you want to delete this borrower?")) return;
       try {
         await api.delete(`/deleteborrowers/${id}`);
         fetchBorrowers();
@@ -66,10 +65,10 @@
         <Topbar />
         <div className="flex flex-1">
             <Sidebar />
-            <main className="flex-1 md:ml-64 p-4 sm:p-6 lg:p-8">
+            <main className="flex-1 md:ml-64 pt-2 px-4 sm:px-6 lg:px-8 pb-6">
               <div className="max-w-7xl mx-auto">
               <div className="mb-8">
-                <h1 className="text-4xl font-bold text-blue-600 mb-1">Borrowers</h1>
+                <h1 className="text-4xl font-bold text-[#4AB5BB] mb-1">Borrowers</h1>
                 <p className="text-lg text-gray-500">
                   Manage borrowers and track their loan activities
                 </p>
@@ -96,13 +95,13 @@
                 </select>
                 <button
                   onClick={() => { setEditBorrower(null); setModelForm(true); }}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition w-full md:w-auto"
+                  className="bg-[#4AB5BB] text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition w-full md:w-auto"
                 >
                   + Add Borrower
                 </button>
               </div>
 
-              {/* Borrowers List */}
+              
               {loading ? (
                 <div className="text-center text-gray-500 py-8">Loading...</div>
               ) : error ? (
@@ -146,13 +145,13 @@
 
                       <div className="flex flex-col sm:flex-row gap-3 mt-auto">
                         <button
-                          className="w-full sm:w-auto flex items-center justify-center gap-1 border border-gray-300 rounded-lg px-4 py-2 text-gray-800 hover:bg-gray-100 transition"
+                          className="w-full sm:w-auto flex items-center justify-center gap-1 border border-gray-300 rounded-lg px-4 py-2 text-gray-800 hover:bg-green-500 hover:text-white transition"
                           onClick={() => { setEditBorrower(b); setModelForm(true); }}
                         >
                           Edit
                         </button>
                         <button
-                          className="w-full sm:w-auto flex items-center justify-center gap-1 border border-gray-300 rounded-lg px-4 py-2 text-gray-800 hover:bg-gray-100 transition"
+                          className="w-full sm:w-auto flex items-center justify-center gap-1 border border-gray-300 rounded-lg px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition"
                           onClick={() => handleDelete(b._id)}
                         >
                           Delete
@@ -166,7 +165,7 @@
           </main>
         </div>
 
-        {/* Borrower Form Modal */}
+        
         {modelForm && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
             <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-lg relative">

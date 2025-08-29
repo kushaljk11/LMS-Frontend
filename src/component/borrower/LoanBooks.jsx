@@ -80,9 +80,8 @@ export default function LoanedBooks() {
     }
   };
 
-  // Filter out returned books and apply search + status filter
   const filteredBooks = books
-    .filter((book) => !book.returned) // exclude returned books
+    .filter((book) => !book.returned)
     .filter((book) => {
       const matchesSearch =
         book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -141,7 +140,7 @@ export default function LoanedBooks() {
             </select>
           </div>
 
-          {/* Book Cards */}
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {currentBooks.map((book) => (
               <LoanBookCard
@@ -157,7 +156,7 @@ export default function LoanedBooks() {
             )}
           </div>
 
-          {/* Pagination */}
+          
           {totalPages > 1 && (
             <div className="flex justify-center mt-8 gap-2">
               <button

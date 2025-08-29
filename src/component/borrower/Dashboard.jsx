@@ -10,13 +10,12 @@ function BorrowerDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Get user name from localStorage
   const savedName = localStorage.getItem("name");
   const [user] = useState({ name: savedName || "User" });
 
   const goToBrowseBooks = () => navigate("/borrower/browse-books");
 
-  // Fetch dashboard data
+  
   const fetchDashboard = async () => {
     try {
       setLoading(true);
@@ -34,7 +33,7 @@ function BorrowerDashboard() {
     }
   };
 
-  // Return book API
+  
   const returnBook = async (borrowId) => {
     try {
       const token = localStorage.getItem("token");
@@ -44,7 +43,7 @@ function BorrowerDashboard() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Optimistically update dashboard data
+      
       setDashboardData((prev) =>
         prev.map((b) =>
           b._id === borrowId ? { ...b, returnDate: new Date() } : b
@@ -59,7 +58,7 @@ function BorrowerDashboard() {
     fetchDashboard();
   }, []);
 
-  // Calculations
+  
   const booksOnLoan = dashboardData.filter((b) => !b.returnDate).length;
   const booksReturned = dashboardData.filter((b) => b.returnDate).length;
   const totalBorrowed = dashboardData.length;
@@ -98,7 +97,7 @@ function BorrowerDashboard() {
             </p>
           </div>
 
-          {/* Summary Cards */}
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             <Card
               title="Books On Loans"
@@ -126,7 +125,7 @@ function BorrowerDashboard() {
             />
           </div>
 
-          {/* Currently Borrowed and Overdue Books */}
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-4 bg-white p-4 sm:p-6 rounded-2xl border border-gray-200">
               <h2 className="font-semibold text-lg mb-2 text-green-700">
@@ -174,7 +173,7 @@ function BorrowerDashboard() {
             </div>
           </div>
 
-          {/* Explore More */}
+          
           <div className="flex flex-col sm:flex-row justify-between items-center mt-6 p-4 sm:p-6 bg-white rounded-2xl border border-gray-200">
             <h2 className="text-lg font-semibold">Explore More Books</h2>
             <button
@@ -186,13 +185,16 @@ function BorrowerDashboard() {
           </div>
         </div>
       </div>
+      <div className="bg-white border-t border-gray-200 p-4 text-center text-sm text-gray-500">
+        &copy; 2024 LibraryMS. All rights reserved.
+      </div>
     </div>
   );
 }
 
 export default BorrowerDashboard;
 
-// --- Card Component ---
+ 
 function Card({ title, value, subtitle, icon }) {
   return (
     <div className="bg-white rounded-2xl p-6 border border-gray-200">
@@ -208,7 +210,7 @@ function Card({ title, value, subtitle, icon }) {
   );
 }
 
-// --- BookCard Component ---
+ 
 function BookCard({ image, title, author, daysOverdue, renewalsLeft, onReturn }) {
   return (
     <div className="flex items-start space-x-4 p-5 rounded-2xl bg-white border border-gray-200">

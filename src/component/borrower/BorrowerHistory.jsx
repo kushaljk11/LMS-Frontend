@@ -48,10 +48,9 @@ export default function BorrowingHistory() {
     return matchesSearch && matchesStatus;
   });
 
-  // Stats
   const totalLoans = historyData.length;
   const booksReturned = historyData.filter((b) => b.status === "Returned").length;
-  const totalRenewals = historyData.reduce((acc, b) => acc + (b.renewals || 0), 0); // assuming renewals field exists
+    const totalRenewals = historyData.reduce((acc, b) => acc + (b.renewals || 0), 0);
   const onTimeReturns =
     totalLoans > 0 ? Math.round((booksReturned / totalLoans) * 100) : 0;
 

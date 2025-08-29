@@ -1,12 +1,5 @@
 import React, { useState } from "react";
 import api from "../../config/config.js";
-
-/**
- * Bookform.jsx
- * Props:
- * - modelForm: state setter to open/close modal (setModelForm)
- * - fetchBooks: optional callback to reload book list after creation
- */
 export default function Bookform({ modelForm, fetchBooks }) {
   const [formData, setFormData] = useState({
     title: "",
