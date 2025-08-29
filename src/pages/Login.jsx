@@ -82,7 +82,9 @@ function Login() {
         >
           <div className="top header flex justify-center items-center flex-col mb-6 text-center">
             <MdLocalLibrary className="text-5xl sm:text-6xl mb-3 text-blue-600 hover:text-black cursor-pointer animate-colorCycle" />
-            <h1 className="text-xl sm:text-2xl font-bold">Library Management</h1>
+            <h1 className="text-xl sm:text-2xl font-bold">
+              Library Management
+            </h1>
             <p className="text-sm sm:text-base text-gray-600">
               Please Sign In to get access
             </p>
@@ -101,7 +103,9 @@ function Login() {
             </div>
 
             <div>
-              <label className="text-sm sm:text-base font-medium">Password</label>
+              <label className="text-sm sm:text-base font-medium">
+                Password
+              </label>
               <input
                 className="border border-gray-300 p-2 rounded-lg w-full shadow-sm text-sm sm:text-base focus:ring-2 focus:ring-blue-500 outline-none"
                 type="password"
@@ -129,7 +133,10 @@ function Login() {
 
             <p className="text-xs sm:text-sm text-gray-500 text-center">
               Don&apos;t have an account?{" "}
-              <span className="text-red-700 cursor-pointer hover:underline">
+              <span
+                className="text-red-700 cursor-pointer hover:underline"
+                onClick={() => navigate("/signup")}
+              >
                 Sign Up
               </span>
             </p>

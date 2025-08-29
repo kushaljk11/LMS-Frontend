@@ -13,6 +13,7 @@ import BrowseBooks from './component/borrower/Browsebook';
 import LoanedBooks from './component/borrower/LoanBooks';
 import BorrowerProfile from './component/borrower/Setting';
 import BorrowingHistory from './component/borrower/BorrowerHistory';
+import Signup from './pages/Signup';
 function App() {
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
           <Route path="/borrower/loaned-books" element={<LoanedBooks />} />
           <Route path="/borrower/settings" element={<BorrowerProfile />} />
           <Route path="/borrower/history" element={<BorrowingHistory />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
     </>
