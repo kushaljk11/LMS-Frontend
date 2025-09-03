@@ -27,7 +27,7 @@ function Signup() {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("https://lms-ozcq.onrender.com/api/auth/register", formData);
+      await axios.post("https://lms-ozcq.onrender.com/api/register", formData);
       toast.success("User registered successfully! Redirecting to login...");
       setTimeout(() => navigate("/login"), 2000); // redirect after 2s
     } catch (error) {
